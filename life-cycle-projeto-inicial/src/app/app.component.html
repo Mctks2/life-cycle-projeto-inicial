@@ -1,12 +1,21 @@
 <section class="main">
-  <app-input [itemQueVaiSerEditado]="itemParaSerEditado">
-  </app-input>
+  <app-input [itemQueVaiSerEditado]="itemParaSerEditado"> </app-input>
   <div class="container">
     <div class="lista">
-      <h4 class="title-list">Lista de Compras</h4>
-      <div *ngIf="listaDeCompra.length !== 0; else naoTemItem"> <!-- Se tem item na lista, mostra os itens, se nao, mostra o template #naoTemItem -->
-          <div *ngFor="let item of listaDeCompra">
-          <app-item [item]="item" (emitindoItemParaEditar)="editarItem($event)"></app-item>
+      <div class="header-lista">
+        <h4 class="title-list">Lista de Compras</h4>
+        <button class="btn-header" (click)="limparLista()">
+          <small>Limpar Lista</small>
+        </button>
+      </div>
+      <div *ngIf="listaDeCompra.length !== 0; else naoTemItem">
+        <!-- Se tem item na lista, mostra os itens, se nao, mostra o template #naoTemItem -->
+        <div *ngFor="let item of listaDeCompra">
+          <app-item
+            [item]="item"
+            (emitindoItemParaEditar)="editarItem($event)"
+            (emitindoItemParaDeletar)="deletarItem($event)"
+          ></app-item>
         </div>
       </div>
       <ng-template #naoTemItem>

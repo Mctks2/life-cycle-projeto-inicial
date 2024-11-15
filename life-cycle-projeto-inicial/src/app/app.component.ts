@@ -9,7 +9,6 @@ import { ListaDeCompraService } from './service/lista-de-compra.service';
 })
 export class AppComponent implements OnInit, DoCheck {
   title = 'app-lista-de-compras';
-
   listaDeCompra!: Array<Item>; // Lista de compras
   itemParaSerEditado!: Item;
 
@@ -20,7 +19,16 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   editarItem(item: Item) {
-    this.itemParaSerEditado = item;
+    this.itemParaSerEditado = item; // Armazena o item que vai ser editado
+  }
+
+  deletarItem(id: number) {
+    const index = this.listaDeCompra.findIndex((item) =>item.id === id); // Encontra o index do item que vai ser deletado
+    this.listaDeCompra.splice(index, 1); // Remove o item
+  }
+
+  limparLista() {
+    this.listaDeCompra = []; // Limpa a lista
   }
 
   ngDoCheck() {
